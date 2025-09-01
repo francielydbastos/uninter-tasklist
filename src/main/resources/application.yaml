@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet:
+    context-path: '/uninter-tasklist/'
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/uninter-tasklist
+    username: postgres
+    password: abc123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non-contextual-creation: true
