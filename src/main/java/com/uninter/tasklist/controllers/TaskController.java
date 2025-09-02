@@ -50,15 +50,8 @@ public class TaskController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateTask(@PathVariable UUID id, @RequestBody TaskModel updatedTask) {
         try {
-            var taskModelOptional = taskService.findById(id);
-            TaskModel existingTask = taskModelOptional.get();
-
-            existingTask.setName(updatedTask.getName());
-            existingTask.setDueDate(updatedTask.getDueDate());
-            existingTask.setAssignee(updatedTask.getAssignee());
-
-            taskService.save(existingTask);
-            return ResponseEntity.status(HttpStatus.OK).body(existingTask);
+            var updatedTaskResult = taskService.update(id, updatedTask);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedTaskResult);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to update task: " + e.getMessage());
         }

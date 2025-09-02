@@ -22,6 +22,24 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public TaskModel update(UUID id, TaskModel updatedTask) {
+        var taskModelOptional = findById(id);
+        TaskModel existingTask = taskModelOptional.get();
+
+        if (updatedTask.getName() != null && !updatedTask.getName().equals(existingTask.getName())) {
+            existingTask.setName(updatedTask.getName());
+        }
+        if (updatedTask.getDueDate() != null && !updatedTask.getDueDate().equals(existingTask.getDueDate())) {
+            existingTask.setDueDate(updatedTask.getDueDate());
+        }
+        if (updatedTask.getAssignee() != null && !updatedTask.getAssignee().equals(existingTask.getAssignee())) {
+            existingTask.setAssignee(updatedTask.getAssignee());
+        }
+
+        return save(existingTask);
+    }
+
+    @Override
     public List<TaskModel> findAll() {
         return taskRepository.findAll();
     }

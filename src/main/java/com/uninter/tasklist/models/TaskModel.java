@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -25,9 +25,9 @@ public class TaskModel {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(nullable = false)
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @Column(nullable = false, length = 150)
     private String assignee;
